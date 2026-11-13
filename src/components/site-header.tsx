@@ -140,8 +140,8 @@ export function SiteHeader({ user }: { user: PublicUser | null }) {
             <Menu className="h-5 w-5" />
           </button>
 
-          <Link href="/" aria-label="WearWise AI home" className="group flex shrink-0 items-center">
-            <Image src="/wearwise-ai-logo.png" alt="WearWise AI" width={520} height={174} priority className="h-auto w-[174px] sm:w-[220px] lg:w-[248px]" />
+          <Link href="/" aria-label="WearWise AI home" className="group flex shrink-0 items-center rounded-md bg-ink/90 px-3 py-1.5">
+            <Image src="/wearwise-ai-logo.png" alt="WearWise AI" width={520} height={174} priority className="h-auto w-[140px] sm:w-[170px] lg:w-[200px]" />
           </Link>
 
           <nav className="hidden items-center gap-8 lg:flex">
@@ -358,7 +358,9 @@ export function SiteHeader({ user }: { user: PublicUser | null }) {
           />
           <div className="absolute left-0 top-0 flex h-full w-[86%] max-w-sm flex-col bg-paper p-6 shadow-lift">
             <div className="flex items-center justify-between">
-              <Image src="/wearwise-ai-logo.png" alt="WearWise AI" width={520} height={174} className="h-auto w-[220px]" />
+              <div className="flex items-center rounded-md bg-ink/90 px-3 py-1.5">
+                <Image src="/wearwise-ai-logo.png" alt="WearWise AI" width={520} height={174} className="h-auto w-[160px]" />
+              </div>
               <button className="btn-icon" onClick={() => setMenuOpen(false)} aria-label="Close menu">
                 <X className="h-5 w-5" />
               </button>

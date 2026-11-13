@@ -118,6 +118,8 @@ const LOOK_BRIEFS: StylistPreferences[] = [
   },
 ];
 
+const YOUTUBE_VIDEO_URL = process.env.NEXT_PUBLIC_YOUTUBE_VIDEO_URL || "https://youtu.be/jM9s45wZJ5w?si=v-LTc88ELdA3IMLA";
+
 function toYouTubeEmbedUrl(input: string) {
   try {
     const url = new URL(input);
@@ -150,7 +152,9 @@ export default async function HomePage() {
                   Autumn / Winter 2026 · AI Studio
                 </span>
               </div>
-              <Image src="/wearwise-ai-logo.png" alt="WearWise AI — fashion meets artificial intelligence" width={760} height={253} priority className="mb-5 h-auto w-full max-w-[440px] animate-fadeIn" />
+              <div className="inline-flex rounded-lg bg-ink/90 px-5 py-3 mb-5 animate-fadeIn">
+                <Image src="/wearwise-ai-logo.png" alt="WearWise AI — fashion meets artificial intelligence" width={760} height={253} priority className="h-auto w-full max-w-[380px]" />
+              </div>
               <h1 className="display mt-2 text-[clamp(2.9rem,6vw,5.2rem)] animate-fadeUp">
                 Discover Your
                 <br />
@@ -255,17 +259,9 @@ export default async function HomePage() {
             <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-smoke">See how WearWise AI turns your occasion, personal taste and budget into complete looks you can actually shop.</p>
           </div>
           <div className="mx-auto mt-10 max-w-5xl overflow-hidden rounded-sm border border-ink/10 bg-ink shadow-lift">
-            {process.env.NEXT_PUBLIC_YOUTUBE_VIDEO_URL ? (
-              <div className="aspect-video">
-                <iframe className="h-full w-full" src={toYouTubeEmbedUrl(process.env.NEXT_PUBLIC_YOUTUBE_VIDEO_URL)} title="Discover WearWise AI" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
-              </div>
-            ) : (
-              <div className="flex aspect-video flex-col items-center justify-center px-6 text-center text-cream">
-                <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full border border-cream/40 text-2xl">▶</div>
-                <p className="font-display text-2xl sm:text-3xl">Your style story starts here.</p>
-                <p className="mt-3 max-w-md text-xs leading-relaxed text-cream/65">Add your YouTube video link to NEXT_PUBLIC_YOUTUBE_VIDEO_URL to show your brand film here.</p>
-              </div>
-            )}
+            <div className="aspect-video">
+              <iframe className="h-full w-full" src={toYouTubeEmbedUrl(YOUTUBE_VIDEO_URL)} title="Discover WearWise AI" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
+            </div>
           </div>
         </div>
       </section>

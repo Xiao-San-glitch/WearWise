@@ -1568,7 +1568,7 @@ const RETAILERS: Record<string, { name: string; base: string }> = {
 };
 
 function buildAffiliateUrl(product: Omit<Product, "affiliateUrl" | "retailer">, retailer: keyof typeof RETAILERS) {
-  const query = encodeURIComponent(`${product.brand} ${product.name}`);
+  const query = encodeURIComponent(product.name);
   const tracked = `utm_source=wearwise&utm_medium=affiliate&utm_campaign=${product.slug}`;
   if (retailer === "Myntra") {
     return `https://www.myntra.com/${CATEGORY_PATH[product.category] ?? "shop"}?rawQuery=${query}&${tracked}`;
