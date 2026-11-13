@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -139,13 +140,8 @@ export function SiteHeader({ user }: { user: PublicUser | null }) {
             <Menu className="h-5 w-5" />
           </button>
 
-          <Link href="/" className="group flex shrink-0 items-baseline gap-1.5">
-            <span className="font-display text-[22px] leading-none tracking-tight sm:text-[25px]">
-              WearWise
-            </span>
-            <span className="rounded-sm bg-ink px-1.5 py-0.5 text-[9px] font-medium uppercase tracking-[0.14em] text-cream">
-              AI
-            </span>
+          <Link href="/" aria-label="WearWise AI home" className="group flex shrink-0 items-center">
+            <Image src="/wearwise-ai-logo.png" alt="WearWise AI" width={520} height={174} priority className="h-auto w-[174px] sm:w-[220px] lg:w-[248px]" />
           </Link>
 
           <nav className="hidden items-center gap-8 lg:flex">
@@ -283,7 +279,7 @@ export function SiteHeader({ user }: { user: PublicUser | null }) {
                   ref={inputRef}
                   value={term}
                   onChange={(event) => setTerm(event.target.value)}
-                  placeholder="Try “black oversized t-shirt under ₹1,000”"
+                  placeholder="Try &ldquo;black oversized t-shirt under ₹1,000&rdquo;"
                   className="w-full bg-transparent text-base outline-none placeholder:text-stone sm:text-lg"
                   aria-label="Search products"
                 />
@@ -328,7 +324,7 @@ export function SiteHeader({ user }: { user: PublicUser | null }) {
                     </div>
                   ) : (
                     <p className="text-sm text-smoke">
-                      Press enter to search the full catalogue for “{term}”.
+                      Press enter to search the full catalogue for &ldquo;{term}&rdquo;.
                     </p>
                   )}
                 </div>
@@ -362,7 +358,7 @@ export function SiteHeader({ user }: { user: PublicUser | null }) {
           />
           <div className="absolute left-0 top-0 flex h-full w-[86%] max-w-sm flex-col bg-paper p-6 shadow-lift">
             <div className="flex items-center justify-between">
-              <span className="font-display text-2xl">WearWise AI</span>
+              <Image src="/wearwise-ai-logo.png" alt="WearWise AI" width={520} height={174} className="h-auto w-[220px]" />
               <button className="btn-icon" onClick={() => setMenuOpen(false)} aria-label="Close menu">
                 <X className="h-5 w-5" />
               </button>

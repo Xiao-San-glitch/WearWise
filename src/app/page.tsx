@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, ArrowUpRight, Sparkles, Star } from "lucide-react";
 import { getProducts } from "@/lib/db";
 import { buildOutfits } from "@/lib/recommend";
@@ -60,21 +61,21 @@ const FEATURED_CATEGORIES = [
 const TESTIMONIALS = [
   {
     quote:
-      "I typed “minimalist office outfit under ₹4,000” and got a full look I actually wore to my internship. The stylist explained why each piece worked.",
+      "I typed \u201Cminimalist office outfit under \u20B94,000\u201D and got a full look I actually wore to my internship. The stylist explained why each piece worked.",
     name: "Ananya S.",
-    meta: "Student · Bengaluru",
+    meta: "Student \u00B7 Bengaluru",
   },
   {
     quote:
       "The budget filter is the real thing. It never pushed me over, and the alternative option made the outfit more affordable without losing the vibe.",
     name: "Rohit M.",
-    meta: "Product designer · Pune",
+    meta: "Product designer \u00B7 Pune",
   },
   {
     quote:
       "I found a wedding saree and shoes together, with the total shown up front. It felt like having a stylist who knows Myntra pricing.",
     name: "Meera K.",
-    meta: "Marketing lead · Mumbai",
+    meta: "Marketing lead \u00B7 Mumbai",
   },
 ];
 
@@ -82,7 +83,7 @@ const LOOK_BRIEFS: StylistPreferences[] = [
   {
     audience: "women",
     budget: 6000,
-    budgetLabel: "₹2,000 – ₹5,000",
+    budgetLabel: "\u20B92,000 \u2013 \u20B95,000",
     occasion: "Date",
     style: "Aesthetic",
     colors: ["Cream", "Black"],
@@ -94,7 +95,7 @@ const LOOK_BRIEFS: StylistPreferences[] = [
   {
     audience: "men",
     budget: 4500,
-    budgetLabel: "₹2,000 – ₹5,000",
+    budgetLabel: "\u20B92,000 \u2013 \u20B95,000",
     occasion: "College",
     style: "Streetwear",
     colors: ["Black"],
@@ -106,7 +107,7 @@ const LOOK_BRIEFS: StylistPreferences[] = [
   {
     audience: "women",
     budget: 12000,
-    budgetLabel: "₹5,000+",
+    budgetLabel: "\u20B95,000+",
     occasion: "Wedding",
     style: "Traditional",
     colors: ["Red", "Cream"],
@@ -116,6 +117,16 @@ const LOOK_BRIEFS: StylistPreferences[] = [
     instructions: "",
   },
 ];
+
+function toYouTubeEmbedUrl(input: string) {
+  try {
+    const url = new URL(input);
+    let videoId = "";
+    if (url.hostname.includes("youtu.be")) videoId = url.pathname.slice(1);
+    else if (url.hostname.includes("youtube.com")) videoId = url.searchParams.get("v") || url.pathname.split("/").filter(Boolean).pop() || "";
+    return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}` : "";
+  } catch { return ""; }
+}
 
 export default async function HomePage() {
   const products = getProducts();
@@ -139,7 +150,8 @@ export default async function HomePage() {
                   Autumn / Winter 2026 · AI Studio
                 </span>
               </div>
-              <h1 className="display mt-6 text-[clamp(2.9rem,6vw,5.2rem)] animate-fadeUp">
+              <Image src="/wearwise-ai-logo.png" alt="WearWise AI — fashion meets artificial intelligence" width={760} height={253} priority className="mb-5 h-auto w-full max-w-[440px] animate-fadeIn" />
+              <h1 className="display mt-2 text-[clamp(2.9rem,6vw,5.2rem)] animate-fadeUp">
                 Discover Your
                 <br />
                 Perfect Style.
@@ -231,6 +243,30 @@ export default async function HomePage() {
               <p className="mt-1 text-[11px] text-stone">{sub}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* WearWise AI introduction video */}
+      <section className="bg-cream py-16 sm:py-24">
+        <div className="container-ww">
+          <div className="mx-auto max-w-3xl text-center">
+            <Eyebrow>Meet your personal stylist</Eyebrow>
+            <h2 className="display mt-4 text-[clamp(2rem,4vw,3.5rem)]">Style, reimagined with AI.</h2>
+            <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-smoke">See how WearWise AI turns your occasion, personal taste and budget into complete looks you can actually shop.</p>
+          </div>
+          <div className="mx-auto mt-10 max-w-5xl overflow-hidden rounded-sm border border-ink/10 bg-ink shadow-lift">
+            {process.env.NEXT_PUBLIC_YOUTUBE_VIDEO_URL ? (
+              <div className="aspect-video">
+                <iframe className="h-full w-full" src={toYouTubeEmbedUrl(process.env.NEXT_PUBLIC_YOUTUBE_VIDEO_URL)} title="Discover WearWise AI" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
+              </div>
+            ) : (
+              <div className="flex aspect-video flex-col items-center justify-center px-6 text-center text-cream">
+                <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full border border-cream/40 text-2xl">▶</div>
+                <p className="font-display text-2xl sm:text-3xl">Your style story starts here.</p>
+                <p className="mt-3 max-w-md text-xs leading-relaxed text-cream/65">Add your YouTube video link to NEXT_PUBLIC_YOUTUBE_VIDEO_URL to show your brand film here.</p>
+              </div>
+            )}
+          </div>
         </div>
       </section>
 
@@ -334,7 +370,7 @@ export default async function HomePage() {
                 Why this works · AI note
               </p>
               <p className="mt-2 font-display text-lg leading-snug">
-                “The cobalt drape carries the evening, so the accessories stay minimal.”
+                &ldquo;The cobalt drape carries the evening, so the accessories stay minimal.&rdquo;
               </p>
               <div className="mt-4 flex items-center justify-between border-t border-ink/10 pt-3">
                 <span className="text-[11px] uppercase tracking-[0.14em] text-smoke">Total look</span>
@@ -420,7 +456,7 @@ export default async function HomePage() {
                 ))}
               </div>
               <blockquote className="mt-4 flex-1 font-display text-lg leading-snug text-graphite">
-                “{testimonial.quote}”
+                &ldquo;{testimonial.quote}&rdquo;
               </blockquote>
               <figcaption className="mt-6 flex items-center gap-3">
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-ink text-[11px] text-cream">
